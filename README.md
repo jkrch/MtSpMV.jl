@@ -11,7 +11,7 @@ By `using MtSpMV` all `mul!` (and `*`) operations will run on multiple threads i
 ## Example
 
 ```julia
-using SparseArrays, MtSpMV
+using SparseArrays, LinearAlgebra, MtSpMV
 
 n = 10000000
 A = sprand(n, n, 5/n)
