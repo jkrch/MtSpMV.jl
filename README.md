@@ -6,7 +6,7 @@ This package provides multithreaded sparse matrix-vector multiplication (SpMV) f
 
 ## Usage
 
-By `using MtSpMV` all `mul!` (and *) operations will run on multiple threads if the input matrix is of type `Transpose{<:Any, <:SparseMatrixCSC}` or `Adjoint{<:Any, <:SparseMatrixCSC}` and the input vector is of type `StridedVector`.
+By `using MtSpMV` all `mul!` (and `*`) operations will run on multiple threads if the input matrix is of type `Transpose{<:Any, <:SparseMatrixCSC}` or `Adjoint{<:Any, <:SparseMatrixCSC}` and the input vector is of type `StridedVector`.
 
 ## Example
 
