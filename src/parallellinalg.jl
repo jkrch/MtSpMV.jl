@@ -7,16 +7,16 @@ function mul!(y::StridedVector, transA::Transpose{<:Any, <:SparseMatrixCSC}, x::
     nzval = A.nzval
     colval = A.rowval
     rowptr = A.colptr
-    n = A.n
-    @inbounds Threads.@threads for i = 1:n
+    m = A.n
+    @inbounds Threads.@threads for i = 1:m
         y[i] = 0 
-        @inbounds for j = rowptr[i]:(rowptr[i+1]-1)
+        @inbounds for j = rowptr[i]:(rowptr[i + 1] - 1)
             y[i] += nzval[j] * x[colval[j]]
         end
     end
     y
 end
-*(transA::Transpose{<:Any,<:SparseMatrixCSC}, x::StridedVector{Tx}) where {Tx} =
+*(transA::Transpose{<:Any, <:SparseMatrixCSC}, x::StridedVector{Tx}) where {Tx} =
     (T = promote_op(matprod, eltype(transA), Tx); mul!(similar(x, T, size(transA, 1)), transA, x, true, false))
 
 
@@ -29,15 +29,15 @@ function mul!(y::StridedVector, adjA::Adjoint{<:Any, <:SparseMatrixCSC}, x::Stri
     nzval = A.nzval
     colval = A.rowval
     rowptr = A.colptr
-    n = A.n
-    @inbounds Threads.@threads for i = 1:n
+    m = A.n
+    @inbounds Threads.@threads for i = 1:m
         y[i] = 0 
-        @inbounds for j = rowptr[i]:(rowptr[i+1]-1)
+        @inbounds for j = rowptr[i]:(rowptr[i + 1] - 1)
             y[i] += nzval[j] * x[colval[j]]
         end
     end
     y
 end
-*(transA::Adjoint{<:Any,<:SparseMatrixCSC}, x::StridedVector{Tx}) where {Tx} =
+*(transA::Adjoint{<:Any, <:SparseMatrixCSC}, x::StridedVector{Tx}) where {Tx} =
     (T = promote_op(matprod, eltype(transA), Tx); mul!(similar(x, T, size(transA, 1)), adjA, x, true, false))
 
