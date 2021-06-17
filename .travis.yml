@@ -1,0 +1,25 @@
+# Documentation: http://docs.travis-ci.com/user/languages/julia
+language: julia
+notifications:
+  email: false
+julia:
+  - 1.0
+  - 1.5
+  - nightly
+os:
+  - linux
+  - osx
+  - windows
+arch:
+  - x64
+env:
+  matrix:
+    - JULIA_NUM_THREADS=1
+    - JULIA_NUM_THREADS=2  
+cache:
+  directories:
+    - ~/.julia/artifacts
+jobs:
+  fast_finish: true
+  allow_failures:
+    - julia: nightly
