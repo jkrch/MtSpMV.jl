@@ -21,3 +21,6 @@ y = zeros(n)
 
 mul!(y, transA, x)
 ```
+
+## Benchmark
+![Benchmark](https://github.com/jkrch/MtSpMV.jl/blob/master/benchmark/benchmark.png)
